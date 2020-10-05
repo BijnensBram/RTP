@@ -22,6 +22,8 @@ int main(int argc,char *argv[]){
 	int N = 10000;
 	double xmax = 1;
 	double xh = 0.5;
+	double x1 = 0.25;
+	double x2 = 0.75;
 	double ymax = 1;
 	double yh = 0.5;
 	double epsilon = 0.001;
@@ -79,7 +81,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				movefunc(x,y,dt,epsilon,xmax,ymax,zh,yh,x1,x2,dx,dy,tt,tau);
+				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau);
 				t+=tt;
 			}
 			t = 0;
@@ -90,7 +92,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				movefunc(x,y,dt,epsilon,xmax,ymax,zh,yh,x1,x2,dx,dy,tt,tau);
+				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau);
 				t+=tt;
 			}
 		}
