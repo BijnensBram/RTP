@@ -19,7 +19,7 @@ double waitingtime(double a,double rand){
 
 int main(int argc,char *argv[]){
 	/*	constants*/
-	int N = 2000;
+	int N = 10000;
 	double xmax = 1;
 	double xh = 0.5;
 	double ymax = 1;
@@ -79,25 +79,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				while (tt < tau){
-					x += dx*dt;
-					if (((xmax-x) <= epsilon | x <= epsilon) && y < yh){
-						x -= dx*dt;
-					} else if (x > xmax){
-						x-=xmax;
-					} else if (x < 0){
-						x+=xmax;
-					}
-					y += dy*dt;
-					if (abs(y-yh) < epsilon && x > xh ){
-						y -= dy*dt;
-					} else if (y > ymax){
-						y=ymax;
-					} else if (y<0){
-							y=0;
-					}
-					tt+=dt;
-				}
+				movefunc(x,y,dt,epsilon,xmax,ymax,zh,yh,x1,x2,dx,dy,tt,tau);
 				t+=tt;
 			}
 			t = 0;
@@ -108,27 +90,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				while (tt < tau){
-					x += dx*dt;
-					if (((xmax-x) <= epsilon | x <= epsilon) && y < yh){
-						x -= dx*dt;
-					} else if (x > xmax){
-						x-=xmax;
-						count++;
-					} else if (x < 0){
-						x+=xmax;
-						count--;
-					}
-					y += dy*dt;
-					if (abs(y-yh) < epsilon && x > xh ){
-						y -= dy*dt;
-					} else if (y > ymax){
-						y=ymax;
-					} else if (y<0){
-							y=0;
-					}
-					tt+=dt;
-				}
+				movefunc(x,y,dt,epsilon,xmax,ymax,zh,yh,x1,x2,dx,dy,tt,tau);
 				t+=tt;
 			}
 		}
