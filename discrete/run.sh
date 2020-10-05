@@ -1,9 +1,10 @@
 #!/bin/sh
 make
 
-for i in 0.05 0.2 0.4 0.6 0.8 1.0
+for a in 0.4 0.6 0.8
 do
-	./discrete $i 0.5 0.01 500 2 > 2smallc_right_$i.txt 
+	./discrete 0.5 $a 0.01 500 2 2 0.05 > right_a_$a\_c0.5.txt 
+	./discrete 0.5 $a 0.01 500 3 2 0.05 > sym_a_$a\_c0.5.txt 
 	echo $i
 done
 echo "done"

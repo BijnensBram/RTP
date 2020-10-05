@@ -19,7 +19,7 @@ double waitingtime(double a,double rand){
 
 int main(int argc,char *argv[]){
 	/*	constants*/
-	int N = 10000;
+	int N = 2000;
 	double xmax = 1;
 	double xh = 0.5;
 	double ymax = 1;
@@ -37,19 +37,23 @@ int main(int argc,char *argv[]){
     std::uniform_real_distribution<double> disty(0,ymax);
 	
 	/* taking user input */ 
-	double c = stod(argv[1]);
-	double a = stod(argv[2]);
-	double dt = stod(argv[3]);
-	double tmax = stod(argv[4]);
-	int obstacle = stod(argv[5]);
-	
+	double c		= stod(argv[1]);
+	double a		= stod(argv[2]);
+	double dt		= stod(argv[3]);
+	double tmax		= stod(argv[4]);
+	int    obstacle = stod(argv[5]);
+	double emax		= stod(argv[6]);
+	double de		= stod(argv[7]);
+	double emin;
 	
 	int (*movefunc)(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau);
 	/* setting the obstacle */ 
 	if (obstacle == 1){
 		movefunc=&righthook;
+		emin = 0;
 	} else {
 		movefunc=&symhook;
+		emin = -emax;
 	}
 	
 	/*	init*/
@@ -62,7 +66,7 @@ int main(int argc,char *argv[]){
 	double t;
 	double tt;
 	
-	for (double e=0; e <=0.1 ; e += 0.005){
+	for (double e=emin; e <= emax ; e += de){
 		count = 0;
 		for (int i =0 ; i <= N ; i++){
 			x = distx(rng);

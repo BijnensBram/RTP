@@ -82,53 +82,46 @@ int main(int argc, char *argv[]){
 
 	/* taking user input */ 
 	double c = stod(argv[1]);
-	double a = stod(argv[2]);
+	double e = stod(argv[2]);
 	double dt = stod(argv[3]);
 	double tmax = stod(argv[4]);
 	int obstacle = stod(argv[5]);
-	double emax = stod(argv[6]);
-	double de = stod(argv[7]);
-	double emin;
 
 	/* setting the obstacle */ 
 	if (obstacle == 1){
 		movefunc=&lefthook;
-		emin = emax;
-		emax = 0;
 	} else if (obstacle == 2) {
 		movefunc=&righthook;
-		emin = 0;
 	} else if (obstacle == 3) {
 		movefunc=&symhook;
-		emin = -emax;
 	} else {
 		movefunc=&no_obstacle;
-		emin = -emax;
 	}
 	
 	/* printing out the parameters */ 
 	PRINTER(dt);
-	PRINTER(a);
+	PRINTER(e);
 	PRINTER(c);
 	PRINTER(N);
 	PRINTER(tmax);
+		
+	double bp = 0.5*(c+e);
+	double bm = 0.5*(-c+e);
+	double bu = 0.5*(c);
+	double bd = 0.5*(-c);
+	double be = 0.5*(e);
+	
+	double p[4] = {(bp+sqrt(bp*bp+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
+	double m[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bm+sqrt(bm*bm+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
+	double u[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bu+sqrt(bu*bu+1))/dx,((bd+sqrt(bd*bd+1))*dx)};
+	double d[4] = {(be+sqrt(be*be+1))/dx,1/((be+sqrt(be*be+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
+	double *list_of_rates[4] = {p, m, u, d};
+	double *rates;
+	testerror(dt,p,m,u,d);
 
 	/* simulation */ 
-	for (double e = emin; e <= emax; e+=de){
+	for (double a = 0.05; a <= 2; a+=0.1){
 
-		double bp = 0.5*(c+e);
-		double bm = 0.5*(-c+e);
-		double bu = 0.5*(c);
-		double bd = 0.5*(-c);
-		double be = 0.5*(e);
-		
-		double p[4] = {(bp+sqrt(bp*bp+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
-		double m[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bm+sqrt(bm*bm+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
-		double u[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bu+sqrt(bu*bu+1))/dx,((bd+sqrt(bd*bd+1))*dx)};
-		double d[4] = {(be+sqrt(be*be+1))/dx,1/((be+sqrt(be*be+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
-		double *list_of_rates[4] = {p, m, u, d};
-		double *rates;
-		testerror(dt,p,m,u,d);
 		count = 0;
 		count_dummy =0;
 		double t;
@@ -169,7 +162,50 @@ int main(int argc, char *argv[]){
 				t+=tau;
 			}
 		}
-		cout << e << ";" << count/(tmax) << endl;
+		cout << a << ";" << count/(tmax) << endl;
+	}
+	for (double a = 2; a <= 10; a+=1){
+		count = 0;
+		count_dummy =0;
+		double t;
+		double tau;
+		for (int i=1; i <= N; i++){
+			x = distx(rng);
+			y = disty(rng);
+			/* equilibration period */ 
+			t=0;
+			while (t < 50){
+				rand = dist(rng);
+				sigma = distsigma(rng);
+				tau = waitingtime(a,rand);
+
+				rates = list_of_rates[sigma];
+				
+				for (double tt=0 ; tt < tau ; tt+=dt){
+					rand = dist(rng);
+					move = movetest(dt,rates,rand);
+					movefunc(move,x,y,count_dummy,nx,nxh,nx1,nx2,ny,nyh);
+				}
+				t += tau;
+			}
+			/* measuring period */ 
+			t=0;
+			while (t < tmax){
+				rand = dist(rng);
+				sigma = distsigma(rng);
+				tau = waitingtime(a,rand);
+
+				rates = list_of_rates[sigma];
+
+				for (double tt=0 ; tt<tau ; tt+=dt){
+					rand = dist(rng);
+					move = movetest(dt,rates,rand);
+					movefunc(move,x,y,count,nx,nxh,nx1,nx2,ny,nyh);
+				}
+				t+=tau;
+			}
+		}
+		cout << a << ";" << count/(tmax) << endl;
 	}
 	return 0;
 }
