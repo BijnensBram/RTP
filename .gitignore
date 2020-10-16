@@ -1,5 +1,4 @@
 *.pdf
 *.txt
 *.o
-./discrete/discrete
 ./discrete_varyinga/discrete
