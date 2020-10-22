@@ -50,14 +50,14 @@ double waitingtime(double a,double rand){
 int main(int argc, char *argv[]){
 	/* setting the program constants */ 
     const double pi2 = 6.28318530718;
-	const double dx = 0.1;
-	const double dy = 0.1;
-	const int nx = 10;
-	const int ny = 10;
-	const int nx1 = 3;
+	const double dx = 0.5;
+	const double dy = 0.5;
+	const int nx = 2;
+	const int ny = 2;
+	const int nx1 = 1;
 	const int nx2 = 8;
-	const int nxh = 5;
-	const int nyh = 5;
+	const int nxh = 1;
+	const int nyh =	1;
     const int N = 10000; 
 
     /* init */
@@ -125,7 +125,7 @@ int main(int argc, char *argv[]){
 		double p[4] = {(bp+sqrt(bp*bp+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
 		double m[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bm+sqrt(bm*bm+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
 		double u[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bu+sqrt(bu*bu+1))/dx,((bd+sqrt(bd*bd+1))/dx)};
-		double d[4] = {(be+sqrt(be*be+1))/dx,1/((be+sqrt(be*be+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
+		double d[4] = {(be+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
 		double *list_of_rates[4] = {p, m, u, d};
 		double *rates;
 		testerror(dt,p,m,u,d);
