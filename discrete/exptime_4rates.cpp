@@ -50,14 +50,14 @@ double waitingtime(double a,double rand){
 int main(int argc, char *argv[]){
 	/* setting the program constants */ 
     const double pi2 = 6.28318530718;
-	const double dx = 0.5;
-	const double dy = 0.5;
-	const int nx = 2;
-	const int ny = 2;
-	const int nx1 = 1;
+	const double dx = 0.1;
+	const double dy = 0.1;
+	const int nx = 10;
+	const int ny = 10;
+	const int nx1 = 3;
 	const int nx2 = 8;
-	const int nxh = 1;
-	const int nyh =	1;
+	const int nxh = 5;
+	const int nyh =	5;
     const int N = 10000; 
 
     /* init */
