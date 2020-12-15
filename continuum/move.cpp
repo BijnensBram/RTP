@@ -4,7 +4,7 @@
 #include "move.h"
 using namespace std;
 
-int righthook(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau,int &count){
+int symhook(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau,int &count){
 	while (tt < tau){
 		x += dx*dt;
 		if (abs(xh-x) <= epsilon  && y < yh){
@@ -29,7 +29,7 @@ int righthook(double &x, double &y, double dt, double epsilon, double xmax, doub
 	return 0;
 }
 
-int symhook(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau, int &count){
+int righthook(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau, int &count){
 	while (tt < tau){
 		x += dx*dt;
 		if (((xmax-x) <= epsilon | x <= epsilon) && y < yh){

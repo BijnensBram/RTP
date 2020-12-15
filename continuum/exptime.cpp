@@ -97,6 +97,6 @@ int main(int argc,char *argv[]){
 				t+=tt;
 			}
 		}
-		cout << e << ";" << count/(tmax) << endl;
+		cout << e << ";" << count/(N*tmax) << endl;
 	}
 } 
