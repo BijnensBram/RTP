@@ -28,6 +28,7 @@ int main(int argc,char *argv[]){
 	double yh = 0.5;
 	double epsilon = 0.001;
 	int count = 0;
+	int dummycount = 0;
 	double rand = 0;
 	double randangle = 0;
 	
@@ -48,7 +49,7 @@ int main(int argc,char *argv[]){
 	double de		= stod(argv[7]);
 	double emin;
 	
-	int (*movefunc)(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau);
+	int (*movefunc)(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau,int &count);
 	/* setting the obstacle */ 
 	if (obstacle == 1){
 		movefunc=&righthook;
@@ -81,7 +82,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau);
+				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau,dummycount);
 				t+=tt;
 			}
 			t = 0;
@@ -92,7 +93,7 @@ int main(int argc,char *argv[]){
 				dx = cos(angle)*c + e;
 				dy = sin(angle)*c;
 				tt=0;
-				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau);
+				movefunc(x,y,dt,epsilon,xmax,ymax,xh,yh,x1,x2,dx,dy,tt,tau,count);
 				t+=tt;
 			}
 		}

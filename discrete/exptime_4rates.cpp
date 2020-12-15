@@ -169,7 +169,7 @@ int main(int argc, char *argv[]){
 				t+=tau;
 			}
 		}
-		cout << e << ";" << count/(tmax) << endl;
+		cout << e << ";" << count/(tmax*N) << endl;
 	}
 	return 0;
 }
