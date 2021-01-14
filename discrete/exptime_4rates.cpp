@@ -66,8 +66,9 @@ int main(int argc, char *argv[]){
 	std::mt19937 rng(dev());
 	std::uniform_real_distribution<double> dist(0,1);
 	std::uniform_int_distribution<int> distsigma(0,3);
-	std::uniform_int_distribution<int> distx(1,nx);
-	std::uniform_int_distribution<int> disty(1,ny);
+	std::uniform_int_distribution<int> distx(0,nx);
+	/* std::uniform_int_distribution<int> disty(nyh,ny); */
+	std::uniform_int_distribution<int> disty(0,nyh);
 	
 	/* defining variables */ 
 	double rand;
@@ -125,7 +126,13 @@ int main(int argc, char *argv[]){
 		double p[4] = {(bp+sqrt(bp*bp+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
 		double m[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bm+sqrt(bm*bm+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx};
 		double u[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bu+sqrt(bu*bu+1))/dx,((bd+sqrt(bd*bd+1))/dx)};
-		double d[4] = {(be+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
+		double d[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)};
+
+		/* double p[4] = {(bp+sqrt(bp*bp+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx}; */
+		/* double m[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bm+sqrt(bm*bm+1))*dx),(bd+sqrt(bd*bd+1))/dx,(bd+sqrt(bd*bd+1))/dx}; */
+		/* double u[4] = {(bm+sqrt(bm*bm+1))/dx,1/((bp+sqrt(bp*bp+1))*dx),(bu+sqrt(bu*bu+1))/dx,((bd+sqrt(bd*bd+1))/dx)}; */
+		/* double d[4] = {(be+sqrt(be*be+1))/dx,1/((be+sqrt(be*be+1))*dx),(bd+sqrt(bd*bd+1))/dx,((bu+sqrt(bu*bu+1))/dx)}; */
+
 		double *list_of_rates[4] = {p, m, u, d};
 		double *rates;
 		testerror(dt,p,m,u,d);

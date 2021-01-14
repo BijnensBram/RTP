@@ -15,8 +15,8 @@ for i in np.linspace(0.4,0.8,3):
 
 plt.legend(ncol=2,frameon=False)
 
-plt.xlabel(r"$\epsilon$")
-h=plt.ylabel("j")
+plt.xlabel(r"$\varepsilon$",fontsize=20)
+h=plt.ylabel("j",fontsize=20)
 h.set_rotation(0)
 plt.hlines(y=0,xmin=-1,xmax=1,colors="black",linewidth=1)
 plt.xlim([-0,1])
@@ -35,8 +35,8 @@ for i in np.linspace(0.4,0.8,3):
     j+=1
 
 plt.legend(ncol=2,frameon=False)
-plt.xlabel(r"$\epsilon$")
-h=plt.ylabel("j")
+plt.xlabel(r"$\varepsilon$",fontsize=20)
+h=plt.ylabel("j",fontsize=20)
 h.set_rotation(0)
 plt.hlines(y=0,xmin=-1,xmax=1,colors="black",linewidth=1)
 plt.vlines(x=0,ymin=-0.1250,ymax=0.1000,colors="black",linewidth=1)
