@@ -1,6 +1,6 @@
 bin
 DATA
 FIG
-*.sh
+SH
 .cache
 .vscode
