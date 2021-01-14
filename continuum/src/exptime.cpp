@@ -30,7 +30,6 @@ int main(int argc,char *argv[]){
 	int count = 0;
 	int dummycount = 0;
 	double rand = 0;
-	double randangle = 0;
 	
 	std::random_device dev;
     std::mt19937 rng(dev());

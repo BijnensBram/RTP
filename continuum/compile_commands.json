@@ -1,0 +1,32 @@
+[
+ {
+  "directory": "/home/bram/Projects/RTP/continuum",
+  "arguments": [
+   "g++",
+   "-Iinclude",
+   "-MMD",
+   "-MP",
+   "-Wall",
+   "-c",
+   "src/exptime.cpp",
+   "-o",
+   "obj/exptime.o"
+  ],
+  "file": "src/exptime.cpp"
+ },
+ {
+  "directory": "/home/bram/Projects/RTP/continuum",
+  "arguments": [
+   "g++",
+   "-Iinclude",
+   "-MMD",
+   "-MP",
+   "-Wall",
+   "-c",
+   "src/move.cpp",
+   "-o",
+   "obj/move.o"
+  ],
+  "file": "src/move.cpp"
+ }
+]

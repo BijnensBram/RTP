@@ -1,13 +1,31 @@
-SOURCES=$(shell find . -name "*.cpp")
-OBJECTS=$(SOURCES:%.cpp=%.o)
-TARGET=continuum
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
+CC 		:= g++
 
-.PHONY: all
-all: $(TARGET)
+EXE := $(BIN_DIR)/continuum
+SRC := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-$(TARGET): $(OBJECTS)
-	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
+CPPFLAGS := -Iinclude -MMD -MP
+CFLAGS   := -Wall
+LDFLAGS  := -Llib
+LDLIBS   := -lm
 
-.PHONY: clean
+.PHONY: all clean
+
+all: $(EXE)
+
+$(EXE): $(OBJ) | $(BIN_DIR)
+	$(CC) $(LDFLAGS) $^ $(LDLIBS) -o $@
+
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+
+$(BIN_DIR) $(OBJ_DIR):
+	mkdir -p $@
+
 clean:
-	rm -f $(TARGET) $(OBJECTS)
+	@$(RM) -rv $(BIN_DIR) $(OBJ_DIR)
+
+-include $(OBJ:.o=.d)

@@ -35,7 +35,7 @@ int fliptest(double mu,int sigma, double rand,int rand2){
 
 /* function to test if particles do not have a change to move greater than one */ 
 int testerror (double dt, double p[],double m[],double u[],double d[]){
-	if ( (p[1]+p[2]+p[3]+p[0])*dt > 1 | (m[1]+m[2]+m[3]+m[0])*dt > 1 | (u[1]+u[2]+u[3]+u[0])*dt > 1 | (d[1]+d[2]+d[3]+d[0])*dt > 1){
+	if ( ((p[1]+p[2]+p[3]+p[0])*dt > 1) | ((m[1]+m[2]+m[3]+m[0])*dt > 1) | ((u[1]+u[2]+u[3]+u[0])*dt > 1) | ((d[1]+d[2]+d[3]+d[0])*dt > 1)){
 		cerr << "Error: rates to high for dt" << endl;
 		exit(1);
 	}
@@ -49,9 +49,7 @@ double waitingtime(double a,double rand){
 
 int main(int argc, char *argv[]){
 	/* setting the program constants */ 
-    const double pi2 = 6.28318530718;
 	const double dx = 0.1;
-	const double dy = 0.1;
 	const int nx = 10;
 	const int ny = 10;
 	const int nx1 = 3;
@@ -71,7 +69,6 @@ int main(int argc, char *argv[]){
 	
 	/* defining variables */ 
 	double rand;
-	int rand2;
 	int x;
     int y;
 	int move;

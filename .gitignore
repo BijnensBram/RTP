@@ -1,5 +1,4 @@
-*.pdf
-*.txt
-*.o
-*.csv
-./discrete_varyinga/discrete
+bin
+DATA
+FIG
+*.sh

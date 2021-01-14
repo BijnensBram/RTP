@@ -32,7 +32,7 @@ int symhook(double &x, double &y, double dt, double epsilon, double xmax, double
 int righthook(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau, int &count){
 	while (tt < tau){
 		x += dx*dt;
-		if (((xmax-x) <= epsilon | x <= epsilon) && y < yh){
+		if ( (((xmax-x) <= epsilon) | (x <= epsilon)) && y < yh){
 			x -= dx*dt;
 		} else if (x > xmax){
 			x-=xmax;
