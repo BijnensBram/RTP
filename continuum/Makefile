@@ -7,7 +7,7 @@ EXE := $(BIN_DIR)/continuum
 SRC := $(wildcard $(SRC_DIR)/*.cpp)
 OBJ := $(SRC:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
 
-CPPFLAGS := -Iinclude -MMD -MP
+CPPFLAGS := -Iinclude -MMD -MP -O3 -fno-trapping-math -fno-tree-vectorize -ffast-math -funroll-loops -march=native -Wno-deprecated
 CFLAGS   := -Wall
 LDFLAGS  := -Llib
 LDLIBS   := -lm

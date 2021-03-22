@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cmath>
 #include <random>
+#include <fstream>
 #include "move.h"
 using namespace std;
 
@@ -46,6 +47,8 @@ int main(int argc,char *argv[]){
 	int    obstacle = stod(argv[5]);
 	double emax		= stod(argv[6]);
 	double de		= stod(argv[7]);
+    string filename = argv[8];
+    ofstream Outfile;
 	double emin;
 	
 	int (*movefunc)(double &x, double &y, double dt, double epsilon, double xmax, double ymax,double xh,double yh, double x1,double x2, double dx, double dy,double &tt,double tau,int &count);
@@ -68,6 +71,7 @@ int main(int argc,char *argv[]){
 	double t;
 	double tt;
 	
+    Outfile.open(filename,ios::trunc);
 	for (double e=emin; e <= emax ; e += de){
 		count = 0;
 		for (int i =0 ; i <= N ; i++){
@@ -96,6 +100,7 @@ int main(int argc,char *argv[]){
 				t+=tt;
 			}
 		}
-		cout << e << ";" << count/(N*tmax) << endl;
+		Outfile << e << ";" << count/(N*tmax) << "\n";
 	}
+    Outfile.close();
 } 
